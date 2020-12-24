@@ -1,1 +1,1 @@
-Hoşgeldin
+Hoşgeldin {{$name}}

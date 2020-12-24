@@ -72,13 +72,15 @@ class RegisterController extends Controller
         ]);
 
         $to_name = 'Antep Bootcamp';
+        $name = $data['name'];
         $to_email = $data['email'];
         $body = [];
-        $mail_data = array(['body'=>$body]);
+        $mail_data = array(['body'=>$body], 'name'=> $name);
 
         Mail::send('email.register-mail', $mail_data, function ($message) use($to_name, $to_email){
-            $message->to($to_email, $to_name)->subject('Welcome!');
             $message->from(env('MAIL_USERNAME'), 'Sistem');
+            $message->to($to_email, $to_name);
+            $message->subject('Welcome!');
         });
 
         return $user;
