@@ -14,15 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    //return view('welcome');
-    return view('layouts.admin-master');
+    return view('welcome');
 });
+
 
 Auth::routes();
 
-Route::get('/notifications', [\App\Http\Controllers\NotificationsController::class, 'index']);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
-
-
+Route::group(['middleware' => 'admin'], function (){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/notifications', [\App\Http\Controllers\NotificationsController::class, 'index']);
+});

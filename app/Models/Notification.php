@@ -19,6 +19,8 @@ class Notification extends Model
     {
         $time = $this->effectiveDate;
         $now = Carbon::now();
+
+
         Carbon::setLocale('tr');
 
         $diffTime = Carbon::parse($time)->diffForHumans([
